@@ -1,7 +1,7 @@
 # 🔌 Especificación Técnica y API — ProjectJaina_TBCBalance
 
 [![GitHub](https://img.shields.io/badge/GitHub-DarckRovert%2FProjectJaina_TBCBalance-black?logo=github)](https://github.com/DarckRovert/ProjectJaina_TBCBalance)
-[![Ecosistema](https://img.shields.io/badge/Ecosistema-WoW%20Per%C3%BA%203.3.5a-gold.svg)](https://darckrovert.github.io/ProjectJaina_Web/)
+[![Ecosistema](https://img.shields.io/badge/Ecosistema-Project%20Jaina%203.3.5a-gold.svg)](https://darckrovert.github.io/ProjectJaina_Web/)
 
 ## 📌 Resumen Arquitectónico
 Monitor de composición de banda, auras sinérgicas y distribución de clases diseñado para auditoría de equilibrio en encuentros de banda TBC / WotLK.
