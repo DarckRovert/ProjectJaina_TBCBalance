@@ -31,26 +31,27 @@ indicator:SetScript("OnLeave", function() GameTooltip:Hide() end)
 indicator:SetScript("OnHide", function(self)
     if GameTooltip:IsOwned(self) then GameTooltip:Hide() end
 end)
-local expires = 0
+local PREFIX = "INTITBC"
 local events = CreateFrame("Frame")
 events:RegisterEvent("CHAT_MSG_ADDON")
 events:RegisterEvent("PLAYER_ENTERING_WORLD")
 events:RegisterEvent("PLAYER_LEAVING_WORLD")
 events:SetScript("OnEvent", function(_, event, prefix, message, channel, sender)
-    if event ~= "CHAT_MSG_ADDON" then indicator:Hide(); expires = 0; return end
-    if prefix ~= "INTITBC" or channel ~= "WHISPER" then return end
+    if event == "PLAYER_ENTERING_WORLD" then
+        if RegisterAddonMessagePrefix then
+            RegisterAddonMessagePrefix(PREFIX)
+        end
+    end
+    if event ~= "CHAT_MSG_ADDON" then indicator:Hide(); return end
+    if prefix ~= PREFIX or channel ~= "WHISPER" then return end
     -- Exact self-origin: another character cannot make the GM display appear.
     local name, realm = UnitName("player"), GetRealmName()
     if sender ~= name and sender ~= name .. "-" .. realm:gsub("%s", "") then return end
-    if not (realm:lower():find("inti", 1, true) or realm:lower():find("jaina", 1, true)) then return end
+    local rLower = realm:lower()
+    if not (rLower:find("inti", 1, true) or rLower:find("jaina", 1, true) or rLower:find("wanitos", 1, true) or rLower:find("forja", 1, true)) then return end
     if message == "1;40;950040" then
-        expires = GetTime() + 4
         indicator:Show()
     elseif message == "0" then
-        expires = 0
         indicator:Hide()
     end
-end)
-events:SetScript("OnUpdate", function()
-    if expires > 0 and GetTime() > expires then expires = 0; indicator:Hide() end
 end)
